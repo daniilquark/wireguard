@@ -1,0 +1,2 @@
+# wireguard
+Simple Wireguard Automation
