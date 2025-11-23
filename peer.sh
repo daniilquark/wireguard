@@ -40,6 +40,10 @@ echo "[+] .env"
 echo "CLIENT_PUBLIC_${NEXT_NUM}=\"$CLIENT_PUB\"" >> .env
 echo "CLIENT_PRIVATE_${NEXT_NUM}=\"$CLIENT_PRIV\"" >> .env
 
+printf "ALLOWED_IPS? (0.0.0.0/0): "
+read ALLOWED_IPS
+ALLOWED_IPS=${ALLOWED_IPS:-0.0.0.0/0}
+
 cat >> "$WG_CONF_PATH" <<EOF
 
 #${NEXT_NUM}
@@ -65,7 +69,7 @@ DNS = 1.1.1.1
 [Peer]
 PublicKey = $SERVER_PUBLIC_KEY
 Endpoint = ${SERVER_ENDPOINT}:${SERVER_PORT}
-AllowedIPs = 0.0.0.0/0
+AllowedIPs = $ALLOWED_IPS
 PersistentKeepalive = 25
 EOF
 
